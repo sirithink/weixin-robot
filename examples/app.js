@@ -12,7 +12,7 @@ var messages = {
 };
 
 // 你在微信公众平台填写的 token
-var WX_TOKEN = 'keyboardcat123';
+var WX_TOKEN = 'tumo';
 
 // 启动服务
 var app = express();
@@ -63,7 +63,7 @@ app.post('/', checkSig, weixin.bodyParser(), function(req, res, next) {
   });
 });
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 1337;
 var hostname = '127.0.0.1';
 app.listen(port, hostname, function() {
   log('listening on ', hostname, port);
