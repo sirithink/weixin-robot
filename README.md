@@ -2,6 +2,13 @@
 
 [微信公众平台](http://mp.weixin.qq.com/cgi-bin/indexpage?t=wxm-index&lang=zh_CN)提供的[开放信息接口](http://mp.weixin.qq.com/cgi-bin/indexpage?t=wxm-callbackapi-doc&lang=zh_CN)的自动回复系统，基于`node.js` 实现。
 
+___
+
+**mark by nasa:**
+
+`2012-12-05` 今天在网上看到了"<http://www.36kr.com/p/177735.html>"这个微信机器人可以向这个方向发展下。
+
+___
 ## 功能：
 
 1. 清晰独立的 router ，轻松实现文本匹配流程控制
