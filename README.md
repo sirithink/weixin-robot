@@ -21,14 +21,33 @@ ___
 
 ## 使用方法：
 
+- [Usage](https://github.com/ktmud/weixin-robot/wiki/Usage)
+- [API](https://github.com/ktmud/weixin-robot/wiki/API)
+
 可通过 npm 安装：
 
 ```
 npm install weixin-robot
 ```
+
 具体使用方法参见 `exapmles/app.js` 。
 
 提供可执行文件 `webot` 用于发送测试消息。
+
+```
+  Usage: webot [options]
+
+  Options:
+
+    -h, --help                 output usage information
+    -V, --version              output the version number
+    -l, --location             Send a <location> (geo, latlng)
+    -t, --token [value]        Provide weixin token
+    -n, --host [value]         Set request hostname, defaults to 127.0.0.1
+    -p, --port <n>             The port your service is listening to, defaults to 3000
+    -d, --destination [value]  The request destination url, will override "host" and "port"
+```
+
 
 Have fun with weixin, enjoy being a robot!
 
