@@ -1,5 +1,9 @@
-var waiter = require('../lib/waiter')({
-  yep: '要|好的|ok'
+
+var weibot = require('../lib/weixin');
+
+// 默认的  yep & nope 不止这些
+var waiter =  weibot.waiter({
+  yep: '要|好的|ok',
   nope: /^(不要|不)$/
 });
 
