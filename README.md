@@ -28,6 +28,8 @@ ___
 
 提供可执行文件 `webot` 用于发送测试消息。
 
+例子：webot -p `host` -t `token`
+
 ```
   Usage: webot [options]
 
