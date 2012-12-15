@@ -42,7 +42,12 @@ router.set('say_hi', {
   }
 });
 
-var reg_search_cmd = /^(搜索|search)\s*(.+)/i;
+var thesaurus = {
+   '500': '伍佰'
+};
+
+var reg_search_cmd = /^(搜索?|search|s\b)\s*(.+)/i;
+var do_search = require('./support/search');
 router.set('search', {
   // 匹配消息的方法，可以是正则，也可以是 function
   'pattern': reg_search_cmd,
@@ -70,9 +75,6 @@ router.set('search', {
   //  });
   //},
   'handler': function(info, next) {
-    // 从某个地方搜索到数据...
-    do_search({ q: info.q }, next);
-
     // handler 内部的 this 关键字即此 router
     //
     // 可以使用 router.waiter 获取到对应的 waiter ，
@@ -85,58 +87,18 @@ router.set('search', {
     // 当然，如果 wait action 指定了 pattern ，
     // 可以不用在 router 里手动 reserve
     // 所有routes跑完之后，会继续尝试匹配waites
+    var q = info.q;
+
+    if (q in thesaurus) {
+      // 第三个参数可以是任意数据，也可以为空
+      // 你可以在 tip 的 function 里自行决定对其如何处理
+      var tip = this.waiter.reserve(info.from, 'confirm_synonym',  { q: q, wd: thesaurus[q] });
+      return next(null, tip);
+    }
+
+    // 从某个地方搜索到数据...
+    do_search({ q: q }, next);
   }
 });
-
-function do_search(param, next) {
-  // webot 自带一个简单的网络请求方法
-  webot.request('http://www.baidu.com/s', {
-    wd: param.q
-  }, function(err, res) {
-    if (err || !res) return next(null, '现在暂时无法搜索，待会儿再来好吗？');
-
-    // 为了兼容不同编码，res 默认是一个 Buffer
-    // 调用 toString 方法，转换为 utf-8 的字符串
-    res = res.toString();
-
-    var reg_h3t = /<h3 class="t">\s*(<a.*?>.*?<\/a>).*?<\/h3>/gi;
-    var links = [];
-    var i = 1;
-
-    while (true) {
-      var m = reg_h3t.exec(res);
-      if (!m || i > 5) break;
-      links.push(i + '. ' + m[1]);
-      i++;
-    }
-
-    var ret;
-    if (links.length) {
-      ret = '在百度搜索到以下结果：\n' + links.join('\n');
-      ret = ret.replace(/\s*data-click=".*?"/gi,  '');
-      ret = ret.replace(/\s*onclick=".*?"/gi,  '');
-      ret = ret.replace(/\s*target=".*?"/gi,  '');
-      ret = ret.replace(/<em>(.*?)<\/em>/gi,  '$1');
-      ret = ret.replace(/<font.*?>(.*?)<\/font>/gi,  '$1');
-      ret = ret.replace(/<span.*?>(.*?)<\/span>/gi,  '$1');
-    } else {
-      ret = '搜不到任何结果呢';
-    }
-
-    // ret 会直接作为
-    // robot.reply() 的返回值
-    //
-    // 如果返回的是一个数组：
-    // ret = [{
-    //   pic: 'http://img.xxx....',
-    //   url: 'http://....',
-    //   title: '这个搜索结果是这样的',
-    //   desc: '哈哈哈哈哈....'
-    // }];
-    //
-    // 则 webot.makeMessage 的时候会生成图文列表
-    next(null, ret);
-  });
-}
 
 module.exports = router;
