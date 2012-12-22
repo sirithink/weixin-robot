@@ -38,6 +38,7 @@ ___
     -h, --help                 output usage information
     -V, --version              output the version number
     -l, --location             Send a <location> (geo, latlng)
+    -i, --image                Send a <image>, provide image url
     -t, --token [value]        Provide weixin token
     -n, --host [value]         Set request hostname, defaults to 127.0.0.1
     -p, --port <n>             The port your service is listening to, defaults to 3000
