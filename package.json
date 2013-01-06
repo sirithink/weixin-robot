@@ -1,6 +1,6 @@
 {
   "name": "weixin-robot",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "homepage": "http://ktmud.github.com/weixin-robot/",
   "repository": "git://github.com/ktmud/weixin-robot.git",
   "description": "微信公众平台开放消息接口机器人",
@@ -9,9 +9,10 @@
   ],
   "dependencies": {
     "debug": ">= 0.0.1",
-    "xml2json": ">= 0.3.2"
+    "xml2js": ">= 0.2.2"
   },
   "devDependencies": {
+    "xml2json": ">= 0.3.2",
     "commander": "*",
     "prettyjson": "*",
     "express": "*",
