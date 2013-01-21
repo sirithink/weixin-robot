@@ -1,25 +1,28 @@
 {
   "name": "weixin-robot",
-  "version": "0.0.6",
+  "version": "0.2.1",
   "homepage": "http://ktmud.github.com/weixin-robot/",
   "repository": "git://github.com/ktmud/weixin-robot.git",
   "description": "微信公众平台开放消息接口机器人",
   "contributors": [
-    "ktmud <jyyjcc@gmail.com> (http://ktmud.com)"
+    "ktmud <jyyjcc@gmail.com> (http://ktmud.com)",
+    "TZ <atian25@qq.com> (http://atian25.iteye.com/)"
   ],
   "dependencies": {
     "debug": ">= 0.0.1",
-    "xml2js": ">= 0.2.2"
+    "xml2js": ">= 0.2.2",
+    "underscore": ">=1.4",
+    "wind": ">= 0.7",
+    "js-yaml": ">1.0"
   },
   "devDependencies": {
-    "xml2json": ">= 0.3.2",
     "commander": "*",
     "prettyjson": "*",
     "express": "*",
     "mocha": "*",
+    "chai": "*",
     "should": "*",
-    "color": "*",
-    "chai": "*"
+    "request": "*"
   },
   "engines": {
     "node" : ">=0.6.0",
@@ -29,7 +32,7 @@
     "webot": "./bin/webot"
   },
   "scripts": {
-    "start": "supervisor --debug examples/app.js",
+    "start": "node examples/app.js",
     "test": "./node_modules/mocha/bin/mocha"
   }
 }
